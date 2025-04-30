@@ -1,7 +1,7 @@
 import { Route, Routes, BrowserRouter } from "react-router-dom";
 
 import Home from "./Home.tsx";
-import Form from "./Form.tsx";
+import Form3 from "./Form3.tsx";
 
 function Router(){
 
@@ -9,7 +9,7 @@ function Router(){
         <BrowserRouter>
             <Routes>
                 <Route path="/" element={<Home />} />
-                <Route path="/cadastro" element={<Form />} />
+                <Route path="/cadastro" element={<Form3 />} />
             </Routes>
         </BrowserRouter>
     )

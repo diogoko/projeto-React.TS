@@ -1,5 +1,7 @@
+import { useEffect, useState } from "react";
 import Header from "../components/Header"
-import {useForm} from "react-hook-form";
+import {SubmitHandler, useForm} from "react-hook-form";
+import axios from "axios";
 
 type FormFields = {
     nome: string;
@@ -7,7 +9,17 @@ type FormFields = {
     uf: string;
 }
 
+type Estado = {
+    sigla: string;
+}
+
 const Form2 = () => {
+    const[estados, setEstados] = useState<Estado[]>([]);
+
+    useEffect(() => {axios.get("https://servicodados.ibge.gov.br/api/v1/localidades/estados")
+        .then(response => setEstados(response.data))
+    }, [])
+
     const {register, 
         handleSubmit, 
         setError,
@@ -15,7 +27,7 @@ const Form2 = () => {
 
     const onSubmit: SubmitHandler<FormFields> = async (data) => {
         try{
-            await new Promise((resolve) => setTimeout(resolvePath, 1000));
+            await new Promise((resolve) => setTimeout(resolve, 1000));
         console.log(data);
         } catch (error) {
             setError("nome", {
@@ -48,20 +60,27 @@ const Form2 = () => {
                                 <input {...register("idade", {
                                     required: "Idade é necessário",
                                 })} type="number" placeholder="idade" />
+                                {errors.idade && (
+                                    <div className="text-red-500">{errors.idade.message}</div>
+                                )}
                             </label>
                         </div>
                         <div>
                             <label>UF:
                                 <select {...register("uf", {
-                                    required: true,
-                                })} placeholder="uf" >
+                                    required: "UF é necessário",
+                                })}>
+                                    <option value= "">Selecione</option>
                                     {
-                                        estados.map(estado => (<option value= {estado.sigla}>{estado.sigla}</option>))
+                                        estados.map(estado => (<option key= {estado.sigla} value= {estado.sigla}>{estado.sigla}</option>))
                                     }
                                 </select>
+                                {errors.uf && (
+                                    <div className= "text-red-500">{errors.uf.message}</div>
+                                )}
                             </label>
                         </div>
-                        <button disabled={isSubmitting} type="button" onClick={btnSalvarClick}>Salvar Cadastro</button>
+                        <button disabled={isSubmitting}>Salvar Cadastro</button>
                         {errors.root && <div className="text-red-500"> {errors.root.message}</div>}
                     </fieldset>
                 </form>
