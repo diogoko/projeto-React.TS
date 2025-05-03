@@ -1,6 +1,6 @@
 import { Route, Routes, BrowserRouter } from "react-router-dom";
 import Home from "./Home.tsx";
-import Form3 from "./Form3.tsx";
+import Form3 from "./Form3";
 
 function Router(){
 
@@ -12,7 +12,6 @@ function Router(){
             </Routes>
         </BrowserRouter>
     )
-
 }
 
 export default Router;
