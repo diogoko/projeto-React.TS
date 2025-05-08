@@ -23,6 +23,9 @@ function Home() {
       <div>
         <Link to="/lista-cadastros">Lista de Clientes</Link>
       </div>
+      <div>
+        <Link to="/editar-cadastros">Editar Cadastros</Link>
+      </div>
     </>
   );
 }
