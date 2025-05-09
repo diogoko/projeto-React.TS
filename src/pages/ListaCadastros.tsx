@@ -1,11 +1,13 @@
 import useListaCadastros from '../hooks/UseListaCadastros';
+import { Link } from 'react-router-dom';
 
 const ListaCadastros = () => {
   const { cadastros } = useListaCadastros();
 
   return (
+    <>
     <div>
-      <h1>Lista de Cadastros</h1>
+      <h1>Lista de Clientes</h1>
 
       {cadastros.length === 0 ? (
         <p>Nenhum cadastro salvo.</p>
@@ -20,7 +22,14 @@ const ListaCadastros = () => {
         </ul>
       )}
     </div>
-  );
+    <div>
+        <Link to="/cadastro">Cadastrar Cliente</Link>
+      </div>
+      <div>
+        <Link to="/editar-cadastros">Editar Cadastros</Link>
+      </div>
+    </>
+);
 };
 
 export default ListaCadastros;

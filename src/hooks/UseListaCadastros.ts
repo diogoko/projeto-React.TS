@@ -19,7 +19,14 @@ const useListaCadastros = () => {
         localStorage.setItem(lista, JSON.stringify(novosCadastros));
     }
 
-    return { cadastros, incluirCadastro };
+    const atualizarCadastro = (index: number, novoCadastro: FormFields) => {
+        const novosCadastros = [...cadastros];
+        novosCadastros[index] = novoCadastro;
+        setCadastros(novosCadastros);
+        localStorage.setItem(lista, JSON.stringify(novosCadastros));
+    };
+
+    return { cadastros, incluirCadastro, atualizarCadastro };
 }
 
 export default useListaCadastros;

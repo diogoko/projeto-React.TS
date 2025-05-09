@@ -13,9 +13,10 @@ const useEstados = () => {
   useEffect(() => {
     axios
       .get<Estado[]>("https://servicodados.ibge.gov.br/api/v1/localidades/estados")
-      .then((response) => {setEstados(response.data);
-      })
-    
+      .then((response) => {
+        const estadosOrdenados = response.data.sort((a, b) => a.sigla.localeCompare(b.sigla));
+        setEstados(estadosOrdenados);
+      });    
   }, []);
 
   return { estados };
